@@ -305,20 +305,6 @@
   // --------------------------------------------------------------------------
   // 04. GSAP Entrance & Scroll-Linked Reveals
   // --------------------------------------------------------------------------
-  const homeTitle = document.getElementById('homeCoverTitle');
-  if (homeTitle) {
-    const titleText = homeTitle.textContent || '';
-    homeTitle.setAttribute('aria-label', titleText);
-    homeTitle.replaceChildren(...Array.from(titleText, (letter, index) => {
-      const span = document.createElement('span');
-      span.className = 'home-cover-letter';
-      span.setAttribute('aria-hidden', 'true');
-      span.textContent = letter === ' ' ? '\u00a0' : letter;
-      span.style.animationDelay = `${index * 0.075}s`;
-      return span;
-    }));
-  }
-
   if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
     // Initial page load timeline
     const loadTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
