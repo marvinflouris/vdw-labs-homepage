@@ -382,7 +382,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: 520;
   line-height: 0.92;
   letter-spacing: 0.005em;
-  color: var(--accent);
+  color: #c3cabe;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.72);
   user-select: none;
   cursor: default;
@@ -395,9 +395,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   font-size: clamp(1rem, 2.2vw, 1.45rem);
   font-weight: 300;
   letter-spacing: 0.04em;
-  color: var(--text-primary);
+  color: #e8e2cc;
+  width: 100%;
+  max-width: 42rem;
+  margin-inline: auto;
   margin-bottom: 2.5rem;
   opacity: 1;
+  text-align: center;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
 }
 
@@ -660,8 +664,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 .principles-marquee-container.is-dragging {
@@ -676,10 +678,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .principle-card {
-  background-color: rgba(16, 45, 48, 0.82);
+  background-color: #18201d;
+  background-image:
+    linear-gradient(rgba(13, 24, 21, 0.68), rgba(13, 24, 21, 0.76)),
+    url("assets/used/images/backgrounds/principle-card-background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--teal-border);
+  border: none;
   border-radius: 20px;
   padding: 2.75rem 2.25rem;
   position: relative;
@@ -689,7 +697,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   justify-content: space-between;
   min-height: 360px;
   transform-style: preserve-3d;
-  transition: translate 0.4s var(--ease-out-expo), border-color 0.3s, box-shadow 0.3s;
+  transition: translate 0.4s var(--ease-out-expo), box-shadow 0.3s;
 }
 
 .marquee-card {
@@ -698,7 +706,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .principle-card:hover {
-  border-color: rgba(191, 201, 216, 0.45);
   box-shadow: var(--shadow-card), var(--shadow-accent-glow);
 }
 

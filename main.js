@@ -305,6 +305,46 @@
   // --------------------------------------------------------------------------
   // 04. GSAP Entrance & Scroll-Linked Reveals
   // --------------------------------------------------------------------------
+  const heroSubtitle = document.getElementById('homeCoverSubtitle');
+  const heroSubtitleText = heroSubtitle?.querySelector('.home-cover-subtitle-text');
+
+  if (heroSubtitle && heroSubtitleText && !prefersReducedMotion) {
+    const fullText = 'Van der Waals AI Labs | Beyond the Limits';
+    const separatorEnd = fullText.indexOf('|') + 1;
+    const prefix = fullText.slice(0, separatorEnd);
+    const finalSIndex = fullText.indexOf(' |');
+    const typeDelay = 85;
+    const pause = (duration) => new Promise((resolve) => window.setTimeout(resolve, duration));
+
+    heroSubtitle.setAttribute('aria-label', fullText);
+
+    (async () => {
+      let visibleText = '';
+
+      while (visibleText.length < prefix.length) {
+        visibleText += fullText[visibleText.length];
+        heroSubtitleText.textContent = visibleText;
+        await pause(typeDelay);
+      }
+
+      await pause(2000);
+
+      while (visibleText.length < fullText.length) {
+        visibleText += fullText[visibleText.length];
+        heroSubtitleText.textContent = visibleText;
+        await pause(typeDelay);
+      }
+
+      await pause(6000);
+
+      while (visibleText.length > finalSIndex) {
+        visibleText = visibleText.slice(0, -1);
+        heroSubtitleText.textContent = visibleText;
+        await pause(typeDelay);
+      }
+    })();
+  }
+
   if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
     // Initial page load timeline
     const loadTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
