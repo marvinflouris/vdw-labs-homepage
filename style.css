@@ -387,7 +387,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   user-select: none;
   cursor: default;
   white-space: nowrap;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .home-cover-subtitle {
@@ -396,13 +396,21 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: 300;
   letter-spacing: 0.04em;
   color: #e8e2cc;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   width: 100%;
   max-width: 42rem;
+  height: 3lh;
   margin-inline: auto;
   margin-bottom: 2.5rem;
   opacity: 1;
   text-align: center;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+}
+
+.home-cover-subtitle-separator {
+  font-weight: 420;
 }
 
 .home-cover-actions {

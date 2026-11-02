@@ -307,42 +307,66 @@
   // --------------------------------------------------------------------------
   const heroSubtitle = document.getElementById('homeCoverSubtitle');
   const heroSubtitleText = heroSubtitle?.querySelector('.home-cover-subtitle-text');
+  const fullSubtitleText = 'Van der Waals AI Labs · Beyond the Limits';
 
-  if (heroSubtitle && heroSubtitleText && !prefersReducedMotion) {
-    const fullText = 'Van der Waals AI Labs | Beyond the Limits';
-    const separatorEnd = fullText.indexOf('|') + 1;
-    const prefix = fullText.slice(0, separatorEnd);
-    const finalSIndex = fullText.indexOf(' |');
-    const typeDelay = 85;
-    const pause = (duration) => new Promise((resolve) => window.setTimeout(resolve, duration));
+  if (heroSubtitle && heroSubtitleText) {
+    const renderSubtitleText = (text) => {
+      const separatorIndex = text.indexOf('·');
 
-    heroSubtitle.setAttribute('aria-label', fullText);
-
-    (async () => {
-      let visibleText = '';
-
-      while (visibleText.length < prefix.length) {
-        visibleText += fullText[visibleText.length];
-        heroSubtitleText.textContent = visibleText;
-        await pause(typeDelay);
+      if (separatorIndex === -1) {
+        heroSubtitleText.textContent = text;
+        return;
       }
 
-      await pause(2000);
+      const separator = document.createElement('span');
+      separator.className = 'home-cover-subtitle-separator';
+      separator.textContent = '·';
+      heroSubtitleText.replaceChildren(
+        text.slice(0, separatorIndex),
+        separator,
+        text.slice(separatorIndex + 1)
+      );
+    };
 
-      while (visibleText.length < fullText.length) {
-        visibleText += fullText[visibleText.length];
-        heroSubtitleText.textContent = visibleText;
-        await pause(typeDelay);
-      }
+    heroSubtitle.setAttribute('aria-label', fullSubtitleText);
 
-      await pause(6000);
+    if (prefersReducedMotion) {
+      renderSubtitleText(fullSubtitleText);
+    } else {
+      const separatorEnd = fullSubtitleText.indexOf('·') + 1;
+      const prefix = fullSubtitleText.slice(0, separatorEnd);
+      const finalSIndex = fullSubtitleText.indexOf(' ·');
+      const typeDelay = 85;
+      const pause = (duration) => new Promise((resolve) => window.setTimeout(resolve, duration));
 
-      while (visibleText.length > finalSIndex) {
-        visibleText = visibleText.slice(0, -1);
-        heroSubtitleText.textContent = visibleText;
-        await pause(typeDelay);
-      }
-    })();
+      (async () => {
+        await pause(1000);
+
+        let visibleText = '';
+
+        while (visibleText.length < prefix.length) {
+          visibleText += fullSubtitleText[visibleText.length];
+          renderSubtitleText(visibleText);
+          await pause(typeDelay);
+        }
+
+        await pause(2000);
+
+        while (visibleText.length < fullSubtitleText.length) {
+          visibleText += fullSubtitleText[visibleText.length];
+          renderSubtitleText(visibleText);
+          await pause(typeDelay);
+        }
+
+        await pause(6000);
+
+        while (visibleText.length > finalSIndex) {
+          visibleText = visibleText.slice(0, -1);
+          renderSubtitleText(visibleText);
+          await pause(typeDelay);
+        }
+      })();
+    }
   }
 
   if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
